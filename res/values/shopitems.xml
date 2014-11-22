@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="shopitems">
+        <item>Tea Bags|Lyons Tea Bags, 100 pack|teabags|1.99</item>
+        <item>Corn Flakes|Kelloggs Cornflakes Cereal 1Kg|cornflakes|4.00</item>
+        <item>Milk|Avonmore Fresh Milk (Tb) 1Ltr|milk|1.24</item>
+        <item>Bread|Brennans 100% Wholemeal Sliced Bread 400G|bread|1.99</item>
+        <item>Sweet Corn|Green Giant Original Sweet Corn 340G|sweetcorn|1.39</item>        
+        <item>Wine|Cabernet Sauvignon 75cl|wine|12.99</item>        
+        <item>Fish|Bird\'s Eye Battered Cod Fillets|battered_fish|7.49</item>       
+        <item>7up|7-up 2 litre|sevenup|1.09</item>
+        <item>Soap|Carex Handwash Aloe Vera 250Ml|soap|1.14</item>
+    </string-array>
+    
+</resources>
