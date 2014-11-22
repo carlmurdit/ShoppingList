@@ -26,6 +26,10 @@
             android:name="ie.dit.murphy.carl.shoppinglist.view.ShopItemsActivity"
             android:label="@string/title_activity_list" >
         </activity>
+        <activity
+            android:name="ie.dit.murphy.carl.shoppinglist.view.ConfirmActivity"
+            android:label="@string/title_activity_confirm" >
+        </activity>
     </application>
 
 </manifest>

@@ -5,6 +5,10 @@ public class UserInfo {
 	private String name = "";
 	private String gender = "";
 	private String jobTitle = "";
+	private Integer age = 0; //date of birth might be better
+	private String email = "";
+	private double budget = 0.0f;
+	
 	
 	// Singleton pattern
 	private UserInfo() {} 
@@ -15,12 +19,6 @@ public class UserInfo {
 		return UserInfo.userInfo;
 	}
 	
-	/*public void reset() {
-		this.name = "";
-		this.gender = "";
-		this.jobTitle = "";
-	}
-*/
 	public String getName() {
 		return name;
 	}
@@ -57,6 +55,40 @@ public class UserInfo {
 		return !jobTitle.equals("");
 	}
 	
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
+	public boolean ageIsValid() {
+		return (getAge() == null || !getAge().equals(0));		
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public boolean emailIsValid() {
+		return !getEmail().equals("");
+	}
+	
+	public double getBudget() {
+		return budget;
+	}
+	public void setBudget(double budget) {
+		this.budget = budget;
+	}
+	
+	public boolean budgetIsValid() {
+		return getBudget() != 0;
+	}
+	
+	
 	public void getErrors() throws Exception {
 		
 		String errMsg="";
@@ -71,11 +103,12 @@ public class UserInfo {
 			errMsg += "Please select a job title.\n";
 		}
 		
+		// todo: age, email, budget
+		
 		if (errMsg!="") {
 			throw new Exception(errMsg);
 		}
 		
 	}
-	
 
 }

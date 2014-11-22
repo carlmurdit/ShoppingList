@@ -20,6 +20,9 @@ public class UserDetailsActivity extends Activity {
 	TextView txtName;
 	RadioGroup rgGender;
 	Spinner spnJobTitles;
+	TextView txtAge;
+	TextView txtEmail;
+	TextView txtBudget;
 	Button btnNext;
 	
 	@Override
@@ -29,7 +32,10 @@ public class UserDetailsActivity extends Activity {
 		
 		txtName = (TextView) findViewById(R.id.tvName);
 		rgGender = (RadioGroup) findViewById(R.id.rgGender);
-		spnJobTitles = (Spinner) findViewById(R.id.spnJobTitle);		
+		spnJobTitles = (Spinner) findViewById(R.id.spnJobTitle);	
+		txtAge = (TextView) findViewById(R.id.txtAge);
+		txtEmail = (TextView) findViewById(R.id.txtEmail);
+		txtBudget = (TextView) findViewById(R.id.txtBudget);
 		btnNext =(Button) findViewById(R.id.btnUserNext);
 		
 		spnJobTitles.setAdapter(new ArrayAdapter<String> 
@@ -64,7 +70,10 @@ public class UserDetailsActivity extends Activity {
 				//set focus to the first invalid control, if any
 				if (badView == null && !info.nameIsValid()) badView = txtName;
 				if (badView == null && !info.genderIsValid()) badView = rgGender;
-				if (badView == null && !info.jobTitleIsValid()) badView = spnJobTitles;	
+				if (badView == null && !info.jobTitleIsValid()) badView = spnJobTitles;		
+				if (badView == null && !info.ageIsValid()) badView = txtAge;
+				if (badView == null && !info.emailIsValid()) badView = txtEmail;
+				if (badView == null && !info.budgetIsValid()) badView = txtBudget;			
 				if (badView != null) badView.requestFocus();
 				//show all the problems in a toast
 				try {

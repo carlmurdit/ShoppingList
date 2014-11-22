@@ -31,5 +31,6 @@
     <string name="search">Search</string>
     <string name="welcome_messages">Hello, %1$s! You have &lt;b>%2$d new messages&lt;/b>.</string>
     <string name="listsummary">&lt;b>%1$d&lt;/b> Items, Total: &lt;b>€%2$.2f&lt;/b</string>
+    <string name="title_activity_confirm">ConfirmActivity</string>
 
 </resources>

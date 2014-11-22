@@ -25,7 +25,7 @@ import android.widget.TextView;
 public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 	
 	Context context;
-	private List<ShopItem> shopItems_orig; 		// to contain all ShopItems 
+	private List<ShopItem> shopItems_orig; 		// Contains all ShopItems, so filtered items can be restored
 	private ItemFilter filter;					// the object that will handle filtering by name
 	private List<ShopItem> shopItems_tobuy;  	// to contain all with qty > 0 
 	
@@ -37,7 +37,6 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 	Button btnDown;
 	TextView tvQty;
 	Button btnUp;
-
 	
 	public ItemAdapter(Context context, int rowResource,
 				List<ShopItem> shopItems) {

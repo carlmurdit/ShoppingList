@@ -2,12 +2,15 @@ package ie.dit.murphy.carl.shoppinglist.view;
 
 import ie.dit.murphy.carl.shoppinglist.R;
 import ie.dit.murphy.carl.shoppinglist.model.ShopItem;
-import java.util.ArrayList;
+import ie.dit.murphy.carl.shoppinglist.model.ShopItems;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,24 +25,16 @@ public class ShopItemsActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
-
-		ArrayList<ShopItem> shopItemList = new ArrayList<ShopItem>();
-
-		for (String shpitm : getResources().getStringArray(R.array.shopitems)) {
-			// add each item by parsing its concatenated string
-			// e.g. "Tea Bags|Lyons Tea Bags, 100 pack|teabags|1.99";
-			try {
-				shopItemList
-						.add(ShopItem.parse(ShopItemsActivity.this, shpitm));
-			} catch (Exception e) {
-				Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-			}
-		}
-
-		shopItemAdapter = new ItemAdapter(this, R.layout.row, shopItemList);
-
-		this.setListAdapter(shopItemAdapter);
 		
+		// The ListView's arraylist data source is in the singleton class ShopItems
+		// load products from Strings.xml
+		ShopItems.getInstance().loadProducts(this);  
+		// initialise adapter with row.xml and data source 
+		shopItemAdapter = new ItemAdapter(this, R.layout.row, 
+				ShopItems.getInstance().getShopItemList());
+
+		// Set the listview in the baseclass to use the adapter
+		this.setListAdapter(shopItemAdapter);
 
 		txtSearch = (EditText) findViewById(R.id.txtSearch);
 		txtSearch.addTextChangedListener(new TextWatcher() {
@@ -57,7 +52,16 @@ public class ShopItemsActivity extends ListActivity {
 
 		});
 		
-		//Button btnNext = (Button) findViewById(R.id.)
+		Button btnNext = (Button) findViewById(R.id.btnListNext);
+		btnNext.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ShopItemsActivity.this, ConfirmActivity.class);
+				startActivity(intent);
+			}
+		});
+		
 
 	}
 
