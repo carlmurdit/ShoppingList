@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ie.dit.murphy.carl.shoppinglist.UserDetailsActivity"
+            android:name="ie.dit.murphy.carl.shoppinglist.view.UserDetailsActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ie.dit.murphy.carl.shoppinglist.ShopItemsActivity"
+            android:name="ie.dit.murphy.carl.shoppinglist.view.ShopItemsActivity"
             android:label="@string/title_activity_list" >
         </activity>
     </application>

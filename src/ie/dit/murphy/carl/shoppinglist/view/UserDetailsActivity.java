@@ -1,6 +1,7 @@
-package ie.dit.murphy.carl.shoppinglist;
+package ie.dit.murphy.carl.shoppinglist.view;
 
 import ie.dit.murphy.carl.shoppinglist.R;
+import ie.dit.murphy.carl.shoppinglist.model.UserInfo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

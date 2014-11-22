@@ -1,4 +1,4 @@
-package ie.dit.murphy.carl.shoppinglist;
+package ie.dit.murphy.carl.shoppinglist.model;
 
 public class UserInfo {
 	private static UserInfo userInfo = null;
