@@ -18,7 +18,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:contentDescription=""
-        android:text="@string/your_selection"
+        android:text="@string/your_shopping_list"
         android:textSize="24sp" />
 
     <ScrollView

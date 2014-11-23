@@ -12,6 +12,7 @@ public class ShopItems {
 	
 	private static ShopItems shopItems;	
 	private ArrayList<ShopItem> shopItemList;
+	private ArrayList<ShopItem> buyItemList; // to contain all with qty > 0 
 	
 	private ShopItems() {}
 	
@@ -24,6 +25,10 @@ public class ShopItems {
 	
 	public ArrayList<ShopItem> getShopItemList() {
 		return shopItemList;
+	}
+	
+	public ArrayList<ShopItem> getBuyItemList() {
+		return buyItemList;
 	}
 	
 	public void loadProducts(Context context) {
@@ -42,6 +47,8 @@ public class ShopItems {
 				Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		}
+		
+		this.buyItemList = new ArrayList<ShopItem>();  //reset selection too
 
 	}
 	
@@ -58,7 +65,7 @@ public class ShopItems {
 		
 		int count = 0;
 		double total = 0.0f;
-		for(ShopItem itm : this.getShopItemList()) { 
+		for(ShopItem itm : this.getBuyItemList()) { 
 			if (itm.getQty()>0) {
 				count += itm.getQty();
 				total += itm.getQty() * itm.getPrice();

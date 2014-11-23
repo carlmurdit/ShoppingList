@@ -126,6 +126,9 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 			
 		rwItem.setQty(rwItem.getQty()+1);
 		tvQty.setText(Integer.toString(rwItem.getQty()));
+		
+		if (!ShopItems.getInstance().getBuyItemList().contains(rwItem))
+			ShopItems.getInstance().getBuyItemList().add(rwItem);
 	
 		UpdateSummary();
 	}
@@ -136,6 +139,9 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 		
 		rwItem.setQty(rwItem.getQty()-1);
 		tvQty.setText(Integer.toString(rwItem.getQty()));
+		
+		if (!ShopItems.getInstance().getBuyItemList().contains(rwItem) && rwItem.getQty() == 0)
+			ShopItems.getInstance().getBuyItemList().remove(rwItem);
 	
 		UpdateSummary();
 	}
