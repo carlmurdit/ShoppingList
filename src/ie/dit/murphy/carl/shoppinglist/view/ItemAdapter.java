@@ -2,6 +2,8 @@ package ie.dit.murphy.carl.shoppinglist.view;
 
 import ie.dit.murphy.carl.shoppinglist.R;
 import ie.dit.murphy.carl.shoppinglist.model.ShopItem;
+import ie.dit.murphy.carl.shoppinglist.model.ShopItems;
+import ie.dit.murphy.carl.shoppinglist.model.ShopItems.Summary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,6 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 	Context context;
 	private List<ShopItem> shopItems_orig; 		// Contains all ShopItems, so filtered items can be restored
 	private ItemFilter filter;					// the object that will handle filtering by name
-	private List<ShopItem> shopItems_tobuy;  	// to contain all with qty > 0 
 	
 	// references to the views on the current row
 	ImageView img;
@@ -44,7 +45,6 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 		this.context = context;
 		this.shopItems_orig = new ArrayList<ShopItem>();
 		this.shopItems_orig.addAll(shopItems);
-		this.shopItems_tobuy = new ArrayList<ShopItem>();
 		UpdateSummary();
 	}
 
@@ -126,9 +126,6 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 			
 		rwItem.setQty(rwItem.getQty()+1);
 		tvQty.setText(Integer.toString(rwItem.getQty()));
-		
-		if (!shopItems_tobuy.contains(rwItem)) 
-			shopItems_tobuy.add(rwItem);
 	
 		UpdateSummary();
 	}
@@ -139,25 +136,16 @@ public class ItemAdapter extends ArrayAdapter<ShopItem> implements Filterable {
 		
 		rwItem.setQty(rwItem.getQty()-1);
 		tvQty.setText(Integer.toString(rwItem.getQty()));
-		
-		if (!shopItems_tobuy.contains(rwItem) && rwItem.getQty() == 0) 
-			shopItems_tobuy.remove(rwItem);
 	
 		UpdateSummary();
 	}
 	
 	private void UpdateSummary() {
-		int count = 0;
-		float total = 0.0f;
-		for(ShopItem itm : this.shopItems_tobuy) { 
-			if (itm.getQty()>0) {
-				count += itm.getQty();
-				total += itm.getQty() * itm.getPrice();
-			}
-		}
+		
+		Summary sel = ShopItems.getInstance().getSummary();
 				
 		Resources res = context.getResources();
-		String text = String.format(res.getString(R.string.listsummary), count, total);
+		String text = String.format(res.getString(R.string.listsummary), sel.Count, sel.Total);
 		//String text = String.format(res.getString(R.string.welcome_messages), "Carl", 3);
 		CharSequence styledText = Html.fromHtml(text);
 		TextView tvSummary = (TextView) ((Activity) context).findViewById(R.id.tvSummary);

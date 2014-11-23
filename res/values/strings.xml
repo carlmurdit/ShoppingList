@@ -4,7 +4,7 @@
     <string name="app_name">Shopping List</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_list">Available Items</string>
+    <string name="title_activity_list">Available Products</string>
     <string name="yourdetails">Your Details</string>
     <string name="surname">Surname:</string>
     <string name="password">Password:</string>
@@ -28,9 +28,12 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="zero">0</string>
+    <string name="tenner">10.00</string>
     <string name="search">Search</string>
-    <string name="welcome_messages">Hello, %1$s! You have &lt;b>%2$d new messages&lt;/b>.</string>
     <string name="listsummary">&lt;b>%1$d&lt;/b> Items, Total: &lt;b>€%2$.2f&lt;/b</string>
-    <string name="title_activity_confirm">ConfirmActivity</string>
-
+    <string name="title_activity_confirm">Selected Products</string>
+    <string name="your_selection">Your Selection:</string>
+    <string name="email_me">Email Me</string>
+    <string name="send_shopping_list">Send Shopping List</string>
+    <string name="someone_gmail_com">someone@gmail.com</string>
 </resources>

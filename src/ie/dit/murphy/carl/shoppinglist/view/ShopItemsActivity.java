@@ -1,8 +1,9 @@
 package ie.dit.murphy.carl.shoppinglist.view;
 
 import ie.dit.murphy.carl.shoppinglist.R;
-import ie.dit.murphy.carl.shoppinglist.model.ShopItem;
 import ie.dit.murphy.carl.shoppinglist.model.ShopItems;
+import ie.dit.murphy.carl.shoppinglist.model.UserInfo;
+import ie.dit.murphy.carl.shoppinglist.model.ShopItems.Summary;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -57,6 +58,21 @@ public class ShopItemsActivity extends ListActivity {
 			
 			@Override
 			public void onClick(View v) {
+				
+				Summary sel = ShopItems.getInstance().getSummary();
+				if (sel.Count == 0) {
+					Toast.makeText(ShopItemsActivity.this, "You have not selected any items.", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				double budget =  UserInfo.getInstance().getBudget();
+				if (sel.Total > budget) {
+					String msg = "Your total is €%.2f which exceeds your budget of €%.2f.";
+					msg = String.format(msg, sel.Total, budget);
+					Toast.makeText(ShopItemsActivity.this, msg, Toast.LENGTH_LONG).show();
+					return;
+				}
+				
 				Intent intent = new Intent(ShopItemsActivity.this, ConfirmActivity.class);
 				startActivity(intent);
 			}
@@ -65,13 +81,5 @@ public class ShopItemsActivity extends ListActivity {
 
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Toast.makeText(this, "AAAAAAAaaah!!!", Toast.LENGTH_SHORT).show();
-		ShopItem itm = (ShopItem) l.getItemAtPosition(position);
-		String s = itm.getName() + " " + itm.getPrice();
-		Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-
-	}
 
 }

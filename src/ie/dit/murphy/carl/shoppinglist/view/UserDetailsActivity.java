@@ -17,13 +17,10 @@ import android.widget.Toast;
 
 public class UserDetailsActivity extends Activity {
 	
-	TextView txtName;
 	RadioGroup rgGender;
 	Spinner spnJobTitles;
-	TextView txtAge;
-	TextView txtEmail;
-	TextView txtBudget;
-	Button btnNext;
+	TextView txtName, txtAge, txtEmail, txtBudget;
+	Button btnNext, btnReset;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +33,26 @@ public class UserDetailsActivity extends Activity {
 		txtAge = (TextView) findViewById(R.id.txtAge);
 		txtEmail = (TextView) findViewById(R.id.txtEmail);
 		txtBudget = (TextView) findViewById(R.id.txtBudget);
-		btnNext =(Button) findViewById(R.id.btnUserNext);
+		btnNext = (Button) findViewById(R.id.btnUserNext);
+		btnReset = (Button) findViewById(R.id.btnReset);
 		
 		spnJobTitles.setAdapter(new ArrayAdapter<String> 
 		  	(this, android.R.layout.simple_spinner_dropdown_item, 
 		  	getResources().getStringArray(R.array.jobtitles)));
+		
+		btnReset.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				txtName.setText("");
+				rgGender.clearCheck();
+				spnJobTitles.setSelection(0);
+				txtAge.setText("0");
+				txtEmail.setText("");
+				txtBudget.setText(getResources().getString(R.string.tenner));
+				UserInfo.getInstance().clear();	
+			}
+		});
 		
 		btnNext.setOnClickListener(new OnClickListener() {
 
@@ -49,25 +61,25 @@ public class UserDetailsActivity extends Activity {
 				//Save to a UserInfo object, then validate
 				
 				UserInfo info = UserInfo.getInstance(); //shorten reference
-				View badView = null; //store the first invalid view, to be focused.
-				
-				//Name
+												
+				// Name, Job Title, Age, Email, Budget
 				info.setName(txtName.getText().toString());
-				//Toast.makeText(UserDetailsActivity.this, "Name="+info.getName(),Toast.LENGTH_SHORT).show();
-				
+				info.setJobTitle(spnJobTitles.getSelectedItem().toString());
+				CharSequence age = ((txtAge.getText().length() == 0) ? "0" : txtAge.getText());
+				info.setAge(Integer.parseInt(age.toString().trim()));
+				info.setEmail(txtEmail.getText().toString());
+				info.setBudget(Double.parseDouble(txtBudget.getText().toString()));
 				//Gender
 				int selectedId = rgGender.getCheckedRadioButtonId();
 				if (selectedId == -1) {
-					UserInfo.getInstance().setGender("");
+					info.setGender("");
 				} else {
 					RadioButton selectedBtn = (RadioButton) findViewById(selectedId);
-					UserInfo.getInstance().setGender(selectedBtn.getText().toString());
+					info.setGender(selectedBtn.getText().toString());
 				}
-				
-				//Job Title
-				UserInfo.getInstance().setJobTitle(spnJobTitles.getSelectedItem().toString());
-				
+							
 				//set focus to the first invalid control, if any
+				View badView = null; //store the first invalid view, to be focused.
 				if (badView == null && !info.nameIsValid()) badView = txtName;
 				if (badView == null && !info.genderIsValid()) badView = rgGender;
 				if (badView == null && !info.jobTitleIsValid()) badView = spnJobTitles;		
@@ -77,10 +89,10 @@ public class UserDetailsActivity extends Activity {
 				if (badView != null) badView.requestFocus();
 				//show all the problems in a toast
 				try {
-					UserInfo.getInstance().getErrors();
+					info.getErrors();
 				} catch (Exception ex) {
 					Toast.makeText(UserDetailsActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-					//return;
+					return;
 				}
 				
 				//all good - open the list activity
@@ -96,7 +108,7 @@ public class UserDetailsActivity extends Activity {
 			
 		});
 		
-		
+		txtName.requestFocus();
 		
 	}
 

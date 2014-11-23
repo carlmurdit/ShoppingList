@@ -18,6 +18,15 @@ public class UserInfo {
 		}
 		return UserInfo.userInfo;
 	}
+    
+    public void clear() {
+    	this.setAge(0);
+    	this.setBudget(0.0f);
+    	this.setEmail("");
+    	this.setGender("");
+    	this.setJobTitle("");
+    	this.setName("");
+    }
 	
 	public String getName() {
 		return name;
@@ -93,21 +102,21 @@ public class UserInfo {
 		
 		String errMsg="";
 		
-		if(!nameIsValid()) {
+		if(!nameIsValid()) 
 			errMsg += "Please enter your name.\n";
-		}
-		if(!genderIsValid()) {
+		if(!genderIsValid())  
 			errMsg += "Please select your gender.\n";
-		}
-		if(!jobTitleIsValid()) {
+		if(!jobTitleIsValid()) 
 			errMsg += "Please select a job title.\n";
-		}
+		if(!ageIsValid()) 
+			errMsg += "Please enter your age.\n";
+		if(!emailIsValid()) 
+			errMsg += "Please enter your email.\n";
+		if(!budgetIsValid()) 
+			errMsg += "Please enter your budget.\n";
 		
-		// todo: age, email, budget
-		
-		if (errMsg!="") {
+		if (errMsg!="")
 			throw new Exception(errMsg);
-		}
 		
 	}
 

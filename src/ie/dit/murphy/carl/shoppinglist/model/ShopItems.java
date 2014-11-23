@@ -1,7 +1,10 @@
 package ie.dit.murphy.carl.shoppinglist.model;
 
 import ie.dit.murphy.carl.shoppinglist.R;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import android.content.Context;
 import android.widget.Toast;
 
@@ -24,9 +27,13 @@ public class ShopItems {
 	}
 	
 	public void loadProducts(Context context) {
+		
+		String[] shopitemArray = context.getResources().getStringArray(R.array.shopitems);
+		Arrays.sort(shopitemArray);
+
 		shopItemList = new ArrayList<ShopItem>();
 
-		for (String shpitm : context.getResources().getStringArray(R.array.shopitems)) {
+		for (String shpitm : shopitemArray) {
 			// add each item by parsing its concatenated string
 			// e.g. "Tea Bags|Lyons Tea Bags, 100 pack|teabags|1.99";
 			try {
@@ -38,5 +45,26 @@ public class ShopItems {
 
 	}
 	
+	public class Summary {
+		public int Count;
+		public double Total;
+		public Summary(int Count, double Total){
+			this.Count = Count;
+			this.Total = Total;
+		}
+	}
+
+	public Summary getSummary() {
+		
+		int count = 0;
+		double total = 0.0f;
+		for(ShopItem itm : this.getShopItemList()) { 
+			if (itm.getQty()>0) {
+				count += itm.getQty();
+				total += itm.getQty() * itm.getPrice();
+			}
+		}
+		return new Summary(count, total);
+	}
 
 }
